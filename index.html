@@ -15,12 +15,13 @@
     --pink: #ff2e7e;
     --pink-soft: #ff6fae;
     --blue: #00c2ff;
+    --blue-soft: #6fd6ff;
     --teal: #1be1c4;
     --ink: #14141c;
     --muted: #6b6b7b;
     --line: #e9e9ef;
-    --grad: linear-gradient(105deg, var(--pink) 0%, #b14bff 45%, var(--blue) 100%);
-    --grad-soft: linear-gradient(105deg, var(--pink) 0%, var(--blue) 100%);
+    --grad: linear-gradient(105deg, var(--pink-soft) 0%, #c79bff 45%, var(--blue-soft) 100%);
+    --grad-soft: linear-gradient(105deg, var(--pink-soft) 0%, var(--blue-soft) 100%);
     --ease: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
@@ -80,14 +81,24 @@
     -webkit-background-clip: text; background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+  .brand {
+    font-weight: 700;
+    background: var(--grad);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
   .nav-cta {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 0.9rem; font-weight: 500;
     text-decoration: none; color: var(--black);
-    padding: 10px 18px; border: 1.5px solid var(--ink); border-radius: 100px;
+    padding: 10px 18px;
+    border: 1.5px solid transparent; border-radius: 100px;
+    background:
+      linear-gradient(var(--white), var(--white)) padding-box,
+      var(--grad-soft) border-box;
     transition: all .3s var(--ease);
   }
-  .nav-cta:hover { background: var(--ink); color: var(--white); }
+  .nav-cta:hover { transform: translateY(-2px); }
 
   /* Language toggle */
   .lang-toggle {
@@ -128,13 +139,13 @@
   .hero-content { position: relative; z-index: 2; }
   .eyebrow {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--pink); margin-bottom: 22px;
+    font-size: 0.95rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--pink-soft); margin-bottom: 22px;
     display: inline-flex; align-items: center; gap: 10px;
     opacity: 0; transform: translateY(20px); animation: rise .9s var(--ease) .1s forwards;
   }
   .eyebrow::before { content: ''; width: 32px; height: 1.5px; background: var(--grad-soft); }
-  html[lang="he"] .eyebrow { letter-spacing: 0.1em; }
+  html[lang="he"] .eyebrow { letter-spacing: 0.1em; color: var(--white); text-shadow: 0 1px 8px rgba(20,20,28,0.18); }
 
   h1 {
     font-family: 'Clash Display', 'Space Grotesk', sans-serif;
@@ -151,7 +162,7 @@
     -webkit-text-fill-color: transparent;
   }
   .hero-sub {
-    font-size: clamp(1.05rem, 2vw, 1.3rem); color: var(--muted);
+    font-size: clamp(1.05rem, 2vw, 1.3rem); color: var(--ink);
     max-width: 46ch; margin-top: 28px;
     opacity: 0; transform: translateY(24px); animation: rise 1s var(--ease) .36s forwards;
   }
@@ -169,18 +180,22 @@
   }
   .btn-primary {
     background: var(--grad); color: var(--white);
-    box-shadow: 0 10px 30px -8px rgba(255,46,126,0.55);
+    box-shadow: 0 10px 30px -8px rgba(255,111,174,0.5);
   }
-  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 18px 40px -10px rgba(0,194,255,0.5); }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 18px 40px -10px rgba(111,214,255,0.5); }
   .btn-primary svg { transition: transform .3s var(--ease); }
   .btn-primary:hover svg { transform: translateX(4px); }
   /* arrow points the right way in RTL */
   html[lang="he"] .btn svg { transform: scaleX(-1); }
   html[lang="he"] .btn-primary:hover svg { transform: scaleX(-1) translateX(4px); }
   .btn-ghost {
-    color: var(--ink); border: 1.5px solid var(--line);
+    color: var(--ink);
+    border: 1.5px solid transparent;
+    background:
+      linear-gradient(var(--white), var(--white)) padding-box,
+      var(--grad-soft) border-box;
   }
-  .btn-ghost:hover { border-color: var(--ink); transform: translateY(-3px); }
+  .btn-ghost:hover { transform: translateY(-3px); }
 
   @keyframes rise { to { opacity: 1; transform: translateY(0); } }
 
@@ -193,7 +208,7 @@
   .sec-label {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 0.8rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--pink); margin-bottom: 22px;
+    color: var(--pink-soft); margin-bottom: 22px;
     display: flex; align-items: center; gap: 12px;
   }
   .sec-label::before { content: ''; width: 28px; height: 1.5px; background: var(--grad-soft); }
@@ -201,43 +216,61 @@
 
   /* ABOUT */
   #about { border-top: 1px solid var(--line); }
-  .about-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 70px; align-items: center; }
-  .about-grid h2 {
+  .about-head { margin-bottom: 56px; max-width: 40ch; }
+  .about-head h2 {
     font-family: 'Clash Display','Space Grotesk',sans-serif;
     font-weight: 600; font-size: clamp(1.9rem, 4vw, 2.9rem);
     line-height: 1.05; letter-spacing: -0.02em; color: var(--black);
   }
-  .about-grid p { font-size: 1.15rem; color: var(--muted); margin-top: 4px; }
-  .about-grid p + p { margin-top: 18px; }
-  .about-grid strong { color: var(--ink); font-weight: 600; }
-
-  .stats { display: flex; gap: 14px; margin-top: 38px; flex-wrap: wrap; }
-  .stat {
-    flex: 1; min-width: 130px;
-    border: 1px solid var(--line); border-radius: 18px; padding: 24px 22px;
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: stretch; }
+  .about-col {
+    display: flex; flex-direction: column;
+    padding: 36px;
+    border: 1px solid var(--line); border-radius: 24px;
     transition: border-color .3s var(--ease), transform .3s var(--ease);
   }
-  .stat:hover { border-color: var(--pink-soft); transform: translateY(-4px); }
-  .stat-num {
-    font-family: 'Space Grotesk', sans-serif; font-weight: 700;
-    font-size: 2rem; letter-spacing: -0.02em;
-    background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  .about-col:hover { border-color: var(--pink-soft); transform: translateY(-4px); }
+  .about-col h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700; font-size: 1.35rem; letter-spacing: -0.01em;
+    color: var(--black); margin-bottom: 18px;
+    display: flex; align-items: center; gap: 12px;
   }
-  .stat-label { font-size: 0.9rem; color: var(--muted); margin-top: 4px; }
+  .about-col h3::before {
+    content: ''; width: 22px; height: 2px; border-radius: 2px;
+    background: var(--grad-soft);
+  }
+  .about-col p { font-size: 1.08rem; color: var(--muted); }
+  .about-col p + p { margin-top: 16px; }
+  .about-col strong { color: var(--ink); font-weight: 600; }
+  .about-btn { align-self: flex-start; margin-top: 28px; }
+  /* push the button to the bottom so both columns' buttons align */
+  .about-col p:last-of-type { margin-bottom: auto; }
 
   /* CTA */
   #cta { padding: 0 0 110px; }
   .cta-card {
     position: relative; overflow: hidden;
-    background: var(--black); color: var(--white);
+    background: #fafaff; color: var(--ink);
+    border: 1px solid var(--line);
     border-radius: 32px; padding: clamp(48px, 7vw, 88px);
     text-align: center;
   }
   .cta-glow {
-    position: absolute; inset: 0; z-index: 0; opacity: 0.65;
-    background:
-      radial-gradient(440px circle at 18% 20%, rgba(255,46,126,0.55), transparent 60%),
-      radial-gradient(440px circle at 85% 80%, rgba(0,194,255,0.5), transparent 60%);
+    position: absolute; inset: 0; z-index: 0;
+    overflow: hidden;
+  }
+  .cta-glow::before, .cta-glow::after {
+    content: ''; position: absolute; border-radius: 50%;
+    filter: blur(80px); opacity: 0.55;
+  }
+  .cta-glow::before {
+    width: 380px; height: 380px; background: var(--pink-soft);
+    top: -120px; left: -80px;
+  }
+  .cta-glow::after {
+    width: 380px; height: 380px; background: var(--blue-soft);
+    bottom: -140px; right: -80px;
   }
   .cta-card > * { position: relative; z-index: 2; }
   .cta-card h2 {
@@ -246,9 +279,8 @@
     line-height: 1; letter-spacing: -0.03em; margin-bottom: 22px;
   }
   html[lang="he"] .cta-card h2 { line-height: 1.1; }
-  .cta-card p { font-size: 1.15rem; color: rgba(255,255,255,0.72); max-width: 44ch; margin: 0 auto 40px; }
+  .cta-card p { font-size: 1.15rem; color: var(--muted); max-width: 44ch; margin: 0 auto 40px; }
   .cta-card .btn-primary { font-size: 1.1rem; padding: 18px 38px; }
-  .cta-note { margin-top: 24px; font-size: 0.9rem; color: rgba(255,255,255,0.5); }
 
   /* FOOTER */
   footer {
@@ -258,6 +290,15 @@
   }
   footer .logo { font-size: 1.1rem; }
   .footer-meta { font-size: 0.88rem; color: var(--muted); }
+  .footer-social { display: flex; align-items: center; gap: 24px; }
+  .social-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.9rem; color: var(--muted); text-decoration: none;
+    transition: color .3s var(--ease);
+  }
+  .social-link svg { color: var(--muted); transition: color .3s var(--ease); }
+  .social-link:hover { color: var(--ink); }
+  .social-link:hover svg { color: var(--pink-soft); }
 
   @media (max-width: 760px) {
     .about-grid { grid-template-columns: 1fr; gap: 36px; }
@@ -284,34 +325,43 @@
   <div class="blob blob-2"></div>
   <div class="blob blob-3"></div>
   <div class="wrap hero-content">
-    <span class="eyebrow" data-en="Tel Aviv · Ultimate Frisbee" data-he="תל אביב · אַלְטִימֵט פריסבי">Tel Aviv · Ultimate Frisbee</span>
-    <h1 data-en='Throw your first <em>disc</em> with us.' data-he='זרקו את <em>הדיסק</em> הראשון שלכם איתנו.'>Throw your first <em>disc</em> with us.</h1>
-    <p class="hero-sub" data-en="tlvulti is Tel Aviv's home for Ultimate Frisbee — a fast, friendly, self-refereed sport. No experience needed. Just show up and play." data-he="tlvulti הוא הבית של אַלְטִימֵט פריסבי בתל אביב — ספורט מהיר, ידידותי ומשפט עצמי. לא צריך ניסיון. פשוט מגיעים ומשחקים.">tlvulti is Tel Aviv's home for Ultimate Frisbee — a fast, friendly, self-refereed sport. No experience needed. Just show up and play.</p>
+    <span class="eyebrow" data-en="Tel Aviv · Ultimate Frisbee" data-he="אולטימייט פריסבי · תל אביב">Tel Aviv · Ultimate Frisbee</span>
+    <h1 data-en='Throw your first <em>disc</em> with us.' data-he='זרקו את <em>הדיסק</em> הראשון שלכם איתנו'>Throw your first <em>disc</em> with us.</h1>
+    <p class="hero-sub" data-en="tlv<span class='brand'>ulti</span> is Tel Aviv's home for Ultimate Frisbee — a fast, friendly, self-refereed sport.<br>No experience needed. Just show up and play." data-he="tlv<span class='brand'>ulti</span> הוא הבית שלכם לאולטימייט פריסבי בתל אביב — ענף ספורט חדש ומסעיר עם קהילה ידידותית ומחבקת.<br>לא צריך ניסיון מקדים — בואו לשחק!">tlv<span class='brand'>ulti</span> is Tel Aviv's home for Ultimate Frisbee — a fast, friendly, self-refereed sport.<br>No experience needed. Just show up and play.</p>
     <div class="hero-actions">
       <a href="#cta" class="btn btn-primary">
         <span data-en="Sign up for a tryout" data-he="הרשמה לאימון ניסיון">Sign up for a tryout</span>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a href="#about" class="btn btn-ghost" data-en="What is Ultimate?" data-he="מה זה אַלְטִימֵט?">What is Ultimate?</a>
+      <a href="#about" class="btn btn-ghost" data-en="What is Ultimate?" data-he="מה זה אולטימייט?">What is Ultimate?</a>
     </div>
   </div>
 </header>
 
 <section id="about">
   <div class="wrap">
+    <div class="about-head reveal">
+      <div class="sec-label" data-en="About the club" data-he="על המועדון">About the club</div>
+      <h2 data-en="New club, established community" data-he="מועדון חדש, קהילה ותיקה">New club, established community</h2>
+    </div>
     <div class="about-grid">
-      <div class="reveal">
-        <div class="sec-label" data-en="About the club" data-he="על המועדון">About the club</div>
-        <h2 data-en="A new club, built on spirit and speed." data-he="מועדון חדש, שנבנה על רוח המשחק ומהירות.">A new club, built on spirit and speed.</h2>
+      <div class="about-col reveal">
+        <h3 data-en="The club" data-he="המועדון">The club</h3>
+        <p data-en='tlvulti plays <strong>4v4 Ultimate Frisbee</strong> — fast, self-refereed, and open to everyone. The game runs on <strong>Spirit of the Game</strong>, where players call their own fouls and respect comes before competition.' data-he='ב-tlvulti משחקים <strong>אולטימייט פריסבי 4 נגד 4</strong> — מהיר, במשפט עצמי, ופתוח לכולם. המשחק מתנהל על פי <strong>רוח המשחק</strong>, שבה השחקנים שופטים את העבירות בעצמם והכבוד קודם לתחרותיות.'>tlvulti plays <strong>4v4 Ultimate Frisbee</strong> — fast, self-refereed, and open to everyone. The game runs on <strong>Spirit of the Game</strong>, where players call their own fouls and respect comes before competition.</p>
+        <p data-en="No experience needed — we'll teach you to throw, cut, and play from your very first session." data-he="לא צריך ניסיון — נלמד אתכם לזרוק, לחתוך ולשחק כבר מהאימון הראשון.">No experience needed — we'll teach you to throw, cut, and play from your very first session.</p>
+        <a href="/get-involved" class="btn btn-ghost about-btn">
+          <span data-en="How to get involved" data-he="איך מצטרפים">How to get involved</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
       </div>
-      <div class="reveal">
-        <p data-en='Ultimate Frisbee blends the flow of soccer, the cuts of basketball, and the catches of football — all without referees. The game runs on <strong>Spirit of the Game</strong>, where players call their own fouls and respect comes first.' data-he='אַלְטִימֵט פריסבי משלב את הזרימה של כדורגל, החיתוכים של כדורסל והתפיסות של פוטבול — והכל בלי שופטים. המשחק מתנהל על פי <strong>רוח המשחק</strong>, שבה השחקנים שופטים את העבירות בעצמם והכבוד קודם לכל.'>Ultimate Frisbee blends the flow of soccer, the cuts of basketball, and the catches of football — all without referees. The game runs on <strong>Spirit of the Game</strong>, where players call their own fouls and respect comes first.</p>
-        <p data-en="tlvulti is just getting started, and that's the best time to join. <strong>Beginners are genuinely welcome</strong> — come learn to throw, run, and play alongside people figuring it out right beside you." data-he="tlvulti רק מתחיל, וזה הזמן הכי טוב להצטרף. <strong>מתחילים באמת מוזמנים</strong> — בואו ללמוד לזרוק, לרוץ ולשחק לצד אנשים שמגלים את המשחק בדיוק לידכם.">tlvulti is just getting started, and that's the best time to join. <strong>Beginners are genuinely welcome</strong> — come learn to throw, run, and play alongside people figuring it out right beside you.</p>
-        <div class="stats">
-          <div class="stat"><div class="stat-num">7v7</div><div class="stat-label" data-en="on the field" data-he="על המגרש">on the field</div></div>
-          <div class="stat"><div class="stat-num">0</div><div class="stat-label" data-en="referees needed" data-he="שופטים נדרשים">referees needed</div></div>
-          <div class="stat"><div class="stat-num" data-en="All" data-he="כל">All</div><div class="stat-label" data-en="levels welcome" data-he="הרמות מוזמנות">levels welcome</div></div>
-        </div>
+      <div class="about-col reveal">
+        <h3 data-en="The community" data-he="הקהילה">The community</h3>
+        <p data-en="Behind the new name is a real Tel Aviv community — players who train together weekly, welcome newcomers, and make the field feel like home from day one." data-he="מאחורי השם החדש עומדת קהילה אמיתית בתל אביב — שחקנים שמתאמנים יחד מדי שבוע, מקבלים חדשים בזרועות פתוחות, וגורמים למגרש להרגיש כמו בית כבר מהיום הראשון.">Behind the new name is a real Tel Aviv community — players who train together weekly, welcome newcomers, and make the field feel like home from day one.</p>
+        <p data-en="Our <strong>coaching staff</strong> brings years of experience, running structured sessions for every level from first-timers to competitive players." data-he="<strong>צוות האימון</strong> שלנו מביא שנות ניסיון, ומעביר אימונים מובנים לכל הרמות — ממתחילים ועד שחקנים תחרותיים.">Our <strong>coaching staff</strong> brings years of experience, running structured sessions for every level from first-timers to competitive players.</p>
+        <a href="/community" class="btn btn-ghost about-btn">
+          <span data-en="Meet the community &amp; coaches" data-he="הכירו את הקהילה והמאמנים">Meet the community &amp; coaches</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
       </div>
     </div>
   </div>
@@ -321,21 +371,30 @@
   <div class="wrap">
     <div class="cta-card reveal">
       <div class="cta-glow"></div>
-      <div class="sec-label" style="justify-content:center; color:var(--pink-soft);" data-en="Get on the field" data-he="צאו למגרש">Get on the field</div>
-      <h2 data-en="Come to a beginners' practice." data-he="בואו לאימון מתחילים.">Come to a beginners' practice.</h2>
+      <div class="sec-label" style="justify-content:center;" data-en="Get on the field" data-he="צאו למגרש">Get on the field</div>
+      <h2 data-en="Schedule a tryout" data-he="קבעו אימון ניסיון">Schedule a tryout</h2>
       <p data-en="Pick a session that works for you and join an existing beginners' practice for a no-pressure tryout. Cleats optional, good vibes required." data-he="בחרו אימון שמתאים לכם והצטרפו לאימון מתחילים קיים לניסיון בלי לחץ. נעלי פקקים אופציונליות, מצב רוח טוב הכרחי.">Pick a session that works for you and join an existing beginners' practice for a no-pressure tryout. Cleats optional, good vibes required.</p>
       <a href="/schedule" class="btn btn-primary">
         <span data-en="See the schedule &amp; sign up" data-he="לצפייה בלוח הזמנים והרשמה">See the schedule &amp; sign up</span>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <p class="cta-note" data-en="Schedule page coming soon — update the link when it's live." data-he="עמוד לוח הזמנים בקרוב — עדכנו את הקישור כשהוא יעלה.">Schedule page coming soon — update the link when it's live.</p>
     </div>
   </div>
 </section>
 
 <footer class="wrap">
   <a href="#" class="logo">tlv<span>ulti</span></a>
-  <span class="footer-meta" data-en="Tel Aviv Ultimate Frisbee · © {YEAR} tlvulti" data-he="אַלְטִימֵט פריסבי תל אביב · © {YEAR} tlvulti">Tel Aviv Ultimate Frisbee · © <span class="year"></span> tlvulti</span>
+  <div class="footer-social">
+    <a href="mailto:hello@tlvulti.com" class="social-link" aria-label="Email">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+      <span>hello@tlvulti.com</span>
+    </a>
+    <a href="https://instagram.com/tlvulti" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      <span>@tlvulti</span>
+    </a>
+  </div>
+  <span class="footer-meta">© <span class="year"></span> tlvulti</span>
 </footer>
 
 <script>
@@ -362,6 +421,9 @@
   let saved = 'en';
   try { saved = localStorage.getItem('tlvulti-lang') || 'en'; } catch (e) {}
   setLang(saved);
+
+  // ---- Footer year ----
+  document.querySelectorAll('.year').forEach(el => el.textContent = new Date().getFullYear());
 
   // ---- Nav border on scroll ----
   const nav = document.getElementById('nav');
